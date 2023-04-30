@@ -5,10 +5,12 @@
   "main": "app.ts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.ts"
+    "start": "nodemon server.ts"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "4",
+    "mongoose": "5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
