@@ -1,25 +1,20 @@
-import express from 'express'
+import express from "express";
+import tourRouter from "./routes/tourRoutes";
 
-const port = 3000
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-app.get('/', (req, res)=> {
-	res.status(200).json({name:'weiii', status: 'busy'})
-})
-
-app.get('/api/vi/count', (req, res) => {
+app.get("/", (req, res) => {
 	res.status(200).json({
-		success: true,
-		data: {name:'weiii', status: 'busy'}
-	})
+		name: "hello",
+	});
+});
+
+app.use("/api/v1/tours", tourRouter);
+
+app.use('/', (_, res) => {
+	res.send("<h1>Page Not Found</h1>")
 })
 
-app.use('/', (req, res) => {
-	res.status(404).send("<h1>Page Not Found</h1>")
-})
-
-app.listen(port, () => {
-	console.log(`App runs on ${port}`)
-})
+export default app;
