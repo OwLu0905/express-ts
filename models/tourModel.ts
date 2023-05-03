@@ -7,4 +7,4 @@ import type { TourType } from "../schema/tours";
 const toursSchema = new mongoose.Schema<TourType>(tourSchema);
 
 // TODO : create
-export const Tour = mongoose.model<TourType>("Tour", toursSchema);
+export const Tour = mongoose.model("Tour", toursSchema);
