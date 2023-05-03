@@ -7,6 +7,7 @@ import {
 	getTour,
 	updateTour,
 	deleteTour,
+	aliasTopTours,
 } from "../controller/tourController";
 
 const router = express.Router();
@@ -17,22 +18,15 @@ router.param("id", (req, res, next, val) => {
 	next();
 });
 
+// NOTE run middleware as preprocess req query then pass to getAllTours to flter....etc
+router.route("/top-5-cheap").get(aliasTopTours, getAllTours);
 
-// prettier-ignore
-router
-	.route("/")
-	.get(getAllTours)
-	.post(createTour);
+router.route("/").get(getAllTours).post(createTour);
 
-// prettier-ignore
-router
-	.route("/:id")
-	.get(getTour)
-	.patch(updateTour)
-  .delete(deleteTour);
+router.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
 
 router.use("/:id", (req, res) => {
-	res.status(405).send('<h1>Method Not Allowed</h1>')
-})
+	res.status(405).send("<h1>Method Not Allowed</h1>");
+});
 
 export default router;
