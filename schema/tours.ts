@@ -1,12 +1,13 @@
-import { SchemaTypeOptions } from "mongoose";
+// import { SchemaTypeOptions, SchemaType } from "mongoose";
 
 export type TourType = {
 	name: string;
-	rating: number;
-	price: number;
+	duration: number;
+	maxGroupSize: number;
 };
 
 // SchemaTypeOptions<TourType>
+//
 
 export const tourSchema = {
 	name: {
@@ -56,6 +57,7 @@ export const tourSchema = {
 	createdAt: {
 		type: Date,
 		default: Date.now(),
+		select: false,
 	},
 	startDates: [Date],
 };
