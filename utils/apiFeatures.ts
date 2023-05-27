@@ -2,8 +2,7 @@ import { QueryWithHelpers } from "mongoose";
 import { QueryReturnType, QueryTourType } from "../controller/tourController";
 
 class APIFeatures {
-	query: QueryWithHelpers<QueryReturnType, any>;
-	queryString: QueryTourType;
+	query: QueryWithHelpers<QueryReturnType, any>; queryString: QueryTourType;
 	constructor(
 		query: QueryWithHelpers<QueryReturnType, any>,
 		queryString: QueryTourType

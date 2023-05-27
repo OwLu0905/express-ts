@@ -14,6 +14,8 @@ export const tourSchema = {
 		type: String,
 		required: [true, "A tour must have a name"],
 		unique: true,
+		maxLength: [40, "A tour name must have less or euqal to 40 characters"],
+		minLength: [10, "A tour name must have greater or euqal to 10 characters"],
 	},
 	duration: {
 		type: Number,
@@ -26,10 +28,16 @@ export const tourSchema = {
 	difficulty: {
 		type: String,
 		required: [true, "A tour must have a difficulty"],
+		enum: {
+			values: ["easy", "medium", "difficult"],
+			message: "Difficulty is xxx",
+		},
 	},
 	ratingsAverage: {
 		type: Number,
 		default: 4.5,
+		min: [1, "Rating must be above 1."],
+		max: [1, "Rating must be below 5."],
 	},
 	ratingsQuantity: {
 		type: Number,
@@ -39,7 +47,17 @@ export const tourSchema = {
 		type: Number,
 		required: [true, "A tour must have a price"],
 	},
-	priceDiscount: Number,
+	priceDiscount: {
+		validate: {
+			// NOTE : this only points to current doc on NEW document creation
+			validator: function(val: number): boolean {
+				// @ts-ignore
+				return val < this.price;
+			},
+			message: "Discount price {VALUE} should be less than price",
+		},
+		type: Number,
+	},
 	summary: {
 		type: String,
 		trim: true,
@@ -60,4 +78,5 @@ export const tourSchema = {
 		select: false,
 	},
 	startDates: [Date],
+	secretTour: { type: Boolean, defualt: false },
 };
