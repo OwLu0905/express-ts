@@ -7,6 +7,27 @@ import mongoose from "mongoose";
 // NOTE : app
 import app from "./app";
 
+// NOTE : unhandle rejection
+process.on("unhandledRejection", (err: Error) => {
+	// console.log(err.name, err.message);
+	console.log("Unhandler Rejection!!!!!! Shuting down...");
+	console.log(err);
+
+	process.exit(1);
+	// server.close(() => {
+	// 	process.exit(1);
+	// });
+});
+
+process.on("uncaughtException", (err: Error) => {
+	console.log("Unhandler Rejection!!!!!! Shuting down...");
+	console.log(err.name, err.message);
+
+	process.exit(1);
+	// server.close(() => {
+	// 	process.exit(1);
+	// });
+});
 
 dotenv.config({ path: "./config.env" });
 
@@ -30,7 +51,6 @@ mongoose
 		console.log("connection failed");
 	});
 
-
 // TODO : FOR testing
 // const testTour = new Tour({
 // 	name: "The Forest Hiking",
@@ -46,6 +66,8 @@ mongoose
 // 	.catch((err) => console.log(err, "err"));
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 	console.log(`App running on port ${PORT}`);
 });
+
+// console.log(x);
